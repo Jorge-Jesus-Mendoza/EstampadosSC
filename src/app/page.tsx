@@ -12,7 +12,7 @@ export default function Home() {
     <div>
       <div className="flex justify-end p-2">
         <a
-          href={"/Jorge_Mendoza_CV.pdf"}
+          href={"/Ejemplo-carta-recomendacion-laboral_2.pdf"}
           className="p-5 rounded-3xl download-button"
         >
           Descarga nuestro catalogo
