@@ -8,26 +8,114 @@
   --background-end-rgb: 255, 255, 255;
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --foreground-rgb: 255, 255, 255;
-    --background-start-rgb: 0, 0, 0;
-    --background-end-rgb: 0, 0, 0;
-  }
-}
-
 body {
-  color: rgb(var(--foreground-rgb));
-  background: linear-gradient(
-      to bottom,
-      transparent,
-      rgb(var(--background-end-rgb))
-    )
-    rgb(var(--background-start-rgb));
+  background: rgb(255, 0, 166);
+  /* background-image: url("/images/woman_placeholder.png");
+  background-repeat: no-repeat;
+  background-position-x: right;
+  background-position-y: center; */
 }
 
-@layer utilities {
-  .text-balance {
-    text-wrap: balance;
+h1 {
+  color: white;
+  font-size: xx-large;
+}
+
+.link-expanded {
+  transition: transform 0.3s;
+}
+
+.link-expanded:hover {
+  transform: scale(1.05);
+}
+
+.download-button {
+  margin-top: 10px;
+  border: 3px solid #000;
+  border-color: white;
+  font-size: large;
+  font-weight: bolder;
+  color: white;
+  transition: transform 0.3s;
+}
+
+.download-button:hover {
+  transform: scale(1.05);
+}
+
+.sara-background {
+  border-radius: 81% 19% 0% 100% / 100% 23% 77% 0%;
+}
+
+.sara-container {
+  position: fixed;
+  bottom: 0;
+  z-index: -5;
+}
+
+.sara-image {
+  width: 70%;
+  height: auto;
+  position: relative;
+}
+
+.social-link {
+  width: 40%;
+  box-shadow: 5px 5px 5px hsl(0, 0%, 0%, 0.3);
+}
+
+@media screen and (max-width: 30em) {
+  h1 {
+    font-size: x-large;
   }
+
+  .download-button {
+    padding: 0.5rem;
+    /* padding: auto; */
+  }
+
+  .sara-background {
+    width: 50%;
+  }
+
+  .social-link {
+    width: 70%;
+  }
+  /* … */
+}
+
+@media screen and (min-width: 30em) and (max-width: 64em) and (orientation: landscape) {
+  h1 {
+    font-size: x-large;
+  }
+  .sara-background {
+    visibility: hidden;
+  }
+  .social-link {
+    width: 60%;
+  }
+  /* … */
+}
+
+@media screen and (min-width: 49em) and (max-width: 64em) {
+  .social-link {
+    width: 80%;
+  }
+  /* … */
+}
+
+@media screen and (min-width: 64em) {
+  .sara-container {
+    background-image: url("/images/blender_logo_no_socket_white.png");
+
+    background-size: 15%;
+    background-repeat: no-repeat;
+    background-position-x: center;
+    background-position-y: bottom;
+  }
+
+  .social-column {
+    margin-bottom: 6rem;
+  }
+  /* … */
 }
