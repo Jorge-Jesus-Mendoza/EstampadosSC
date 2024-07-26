@@ -72,7 +72,7 @@ h1 {
 
   .download-button {
     padding: 0.5rem;
-    margin-bottom: 50px;
+    margin-bottom: 25px;
     /* padding: auto; */
   }
 
@@ -92,7 +92,7 @@ h1 {
     font-size: x-large;
   }
   .download-button {
-    margin-bottom: 50px;
+    margin-bottom: 25px;
   }
   .sara-background {
     visibility: hidden;
