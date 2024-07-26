@@ -61,6 +61,7 @@ h1 {
 
 .social-link {
   width: 40%;
+  height: 4rem;
   box-shadow: 5px 5px 5px hsl(0, 0%, 0%, 0.3);
 }
 
@@ -80,6 +81,7 @@ h1 {
 
   .social-link {
     width: 70%;
+    height: 3rem;
   }
   /* … */
 }
