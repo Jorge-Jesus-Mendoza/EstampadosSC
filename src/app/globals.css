@@ -72,6 +72,7 @@ h1 {
 
   .download-button {
     padding: 0.5rem;
+    margin-bottom: 50px;
     /* padding: auto; */
   }
 
@@ -89,6 +90,9 @@ h1 {
 @media screen and (min-width: 30em) and (max-width: 64em) and (orientation: landscape) {
   h1 {
     font-size: x-large;
+  }
+  .download-button {
+    margin-bottom: 50px;
   }
   .sara-background {
     visibility: hidden;
