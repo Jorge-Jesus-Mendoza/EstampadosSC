@@ -44,6 +44,7 @@ h1 {
 }
 
 .sara-background {
+  background-color: white;
   border-radius: 81% 19% 0% 100% / 100% 23% 77% 0%;
 }
 
@@ -51,10 +52,12 @@ h1 {
   position: fixed;
   bottom: 0;
   z-index: -5;
+  height: 50%;
+  /* background-color: chartreuse; */
 }
 
 .sara-image {
-  width: 70%;
+  width: 90%;
   height: auto;
   position: relative;
 }
@@ -63,6 +66,12 @@ h1 {
   width: 40%;
   height: 4rem;
   box-shadow: 5px 5px 5px hsl(0, 0%, 0%, 0.3);
+}
+
+.logo {
+  filter: brightness(0) invert(1);
+  width: 25%;
+  height: auto;
 }
 
 @media screen and (max-width: 30em) {
@@ -76,8 +85,20 @@ h1 {
     /* padding: auto; */
   }
 
+  .sara-image {
+    height: 100%;
+    width: 100%;
+  }
+
   .sara-background {
     width: 50%;
+    /* display: flex;
+    flex-direction: column;
+    justify-content: end; */
+  }
+
+  .sara-container {
+    height: 40%;
   }
 
   .social-link {
@@ -111,8 +132,11 @@ h1 {
 }
 
 @media screen and (min-width: 64em) {
+  .logo {
+    width: 10%;
+  }
   .sara-container {
-    background-image: url("/images/blender_logo_no_socket_white.png");
+    background-image: url("/images/powered-w.png");
 
     background-size: 15%;
     background-repeat: no-repeat;
