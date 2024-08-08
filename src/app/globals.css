@@ -8,17 +8,82 @@
   --background-end-rgb: 255, 255, 255;
 }
 
-body {
-  background: rgb(255, 0, 166);
+table {
+  border-radius: 15px;
+  overflow: hidden;
+  border-collapse: collapse;
+  width: 100%; /* Ajusta el ancho de la tabla */
+}
+
+th,
+td {
+  text-align: left;
+  padding: 16px;
+  border: 1px solid #ddd;
+  padding: 8px;
+  width: 20%; /* Ajusta el ancho de las columnas, en este caso a un 25% */
+  /* font-size: 5px; */
+}
+
+thead {
+  background: #333;
+  color: white;
+  border-radius: 2px 2px;
+}
+
+tr:nth-child(even) {
+  background: #f2f2f2;
+}
+
+h1 {
+  color: white;
+  font-size: xx-large;
+}
+
+.user-dashboard {
+  background-color: rgb(255, 0, 166);
   /* background-image: url("/images/woman_placeholder.png");
   background-repeat: no-repeat;
   background-position-x: right;
   background-position-y: center; */
 }
 
-h1 {
-  color: white;
-  font-size: xx-large;
+.admin-dashboard {
+  background-color: white;
+
+  min-height: 100vh;
+  /* min-width: 100vh; */
+}
+
+.auth-form {
+  border: #dddddd 0.5px solid;
+  width: 35%;
+}
+
+.auth-logo {
+  width: 30%;
+  height: auto;
+}
+
+.social-table {
+  display: inline-block;
+  width: 200%;
+}
+
+.standar-form {
+  width: 75%;
+}
+
+.table-container {
+  width: 100%; /* o cualquier tamaño deseado */
+  overflow-x: auto; /* habilita el scroll lateral */
+  white-space: nowrap; /* evita el ajuste automático del contenido */
+  padding: 25px;
+}
+
+.top-logo {
+  font-size: 1.5rem /* 24px */;
+  line-height: 2rem /* 32px */;
 }
 
 .link-expanded {
@@ -79,6 +144,18 @@ h1 {
     font-size: x-large;
   }
 
+  .auth-logo {
+    width: 50%;
+  }
+
+  .auth-form {
+    width: 80%;
+  }
+
+  .top-logo {
+    font-size: 1rem;
+  }
+
   .download-button {
     padding: 0.5rem;
     margin-bottom: 25px;
@@ -112,6 +189,15 @@ h1 {
   h1 {
     font-size: x-large;
   }
+
+  .auth-logo {
+    width: 30%;
+  }
+
+  .auth-form {
+    width: 80%;
+  }
+
   .download-button {
     margin-bottom: 25px;
   }
@@ -128,6 +214,14 @@ h1 {
   .social-link {
     width: 80%;
   }
+
+  .auth-logo {
+    width: 30%;
+  }
+
+  .auth-form {
+    width: 80%;
+  }
   /* … */
 }
 
@@ -135,6 +229,11 @@ h1 {
   .logo {
     width: 10%;
   }
+
+  .standar-form {
+    width: 25%;
+  }
+
   .sara-container {
     background-image: url("/images/powered-w.png");
 

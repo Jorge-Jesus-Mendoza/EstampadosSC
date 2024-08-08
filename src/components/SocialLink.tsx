@@ -6,7 +6,7 @@ interface Props {
   url: string;
 }
 
-const SocialLink = ({ name, url }: Props) => {
+export const SocialLink = ({ name, url }: Props) => {
   return (
     <Link
       href={url}
@@ -18,5 +18,3 @@ const SocialLink = ({ name, url }: Props) => {
     </Link>
   );
 };
-
-export default SocialLink;
