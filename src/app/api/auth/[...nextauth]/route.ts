@@ -1,12 +1,11 @@
 import prisma from "@/lib/prisma";
 import { PrismaAdapter } from "@auth/prisma-adapter";
-import NextAuth from "next-auth";
+import NextAuth, { NextAuthOptions } from "next-auth";
 import { Adapter } from "next-auth/adapters";
 import CredentialsProvider from "next-auth/providers/credentials";
 import { signInEmailPassword } from "@/auth/components/actions/auth-actions";
 
-export const authOptions = {
-  // Configure one or more authentication providers
+export const authOptions: NextAuthOptions = {
   adapter: PrismaAdapter(prisma) as Adapter,
   providers: [
     CredentialsProvider({
@@ -23,34 +22,33 @@ export const authOptions = {
           placeholder: "******",
         },
         access_type: {
-          label: "type of access",
+          label: "Type of Access",
           type: "text",
           placeholder: "signIn or logIn",
         },
       },
-      async authorize(credentials, req) {
-        // Add logic here to look up the user from the credentials supplied
+      async authorize(credentials) {
+        if (!credentials) {
+          throw new Error("No credentials provided");
+        }
 
         const user = await signInEmailPassword(
-          credentials!.email,
-          credentials!.password,
-          credentials!.access_type
+          credentials.email,
+          credentials.password,
+          credentials.access_type
         );
 
         if (!user) {
-          return { error: "Usuario o contraseña incorrectos" };
-        } else if (user && !user.isActive) {
-          return {
-            error:
-              "Su usuario se encuentra desactivado, contacte con un administrador",
-          };
+          throw new Error("Usuario o contraseña incorrectos");
         }
 
-        if (user) {
-          // Any object returned will be saved in `user` property of the JWT
-          return user;
+        if (user && !user.isActive) {
+          throw new Error(
+            "Su usuario se encuentra desactivado, contacte con un administrador"
+          );
         }
-        return null;
+
+        return user;
       },
     }),
   ],
@@ -59,31 +57,32 @@ export const authOptions = {
   },
 
   callbacks: {
-    async signIn({ user, account, profile, email, credentials }: any) {
-      if (user?.error) {
-        throw new Error(user?.error);
+    async signIn({ user }) {
+      if (user && "error" in user) {
+        throw new Error(user.error);
       }
       return true;
     },
 
-    async jwt({ token, user, account, profile }: any) {
-      const dbUser = await prisma.user.findUnique({
-        where: {
-          email: token.email ?? "no-email",
-        },
-      });
+    async jwt({ token, user }) {
+      if (user) {
+        const dbUser = await prisma.user.findUnique({
+          where: { email: token.email ?? undefined },
+        });
 
-      if (!dbUser?.isActive) {
-        throw Error("El usuario no está activo");
+        if (!dbUser?.isActive) {
+          throw new Error("El usuario no está activo");
+        }
+
+        token.roles = dbUser?.roles ?? ["no-roles"];
+        token.id = dbUser?.id ?? "no-uuid";
       }
-      token.roles = dbUser?.roles ?? ["no-roles"];
-      token.id = dbUser?.id ?? "no-uuid";
 
       return token;
     },
 
-    async session({ session, token, user }: any) {
-      if (session && session?.user) {
+    async session({ session, token }) {
+      if (session?.user) {
         session.user.roles = token.roles;
         session.user.id = token.id;
       }
