@@ -4,7 +4,8 @@ import { signIn } from "next-auth/react";
 import Image from "next/image";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
-import { FormEvent, useState } from "react";
+import { FormEvent, useEffect, useState } from "react";
+import passwordSchema from "@/components/passwordSchema";
 
 export default function SignInPage() {
   const [formValues, setFormValues] = useState({
@@ -12,7 +13,22 @@ export default function SignInPage() {
     password: "",
   });
   const [showError, setShowError] = useState(false);
+  const [errorsForm, setErrorsForm] = useState<string[]>([]);
   const router = useRouter();
+
+  const validatePassword = async (value: string) => {
+    try {
+      await passwordSchema.validate({ password: value }, { abortEarly: false });
+      setErrorsForm([]); // Sin errores
+    } catch (err: any) {
+      const validationErrors = err.inner.map((error: any) => error.message);
+      setErrorsForm(validationErrors);
+    }
+  };
+
+  useEffect(() => {
+    validatePassword(formValues.password);
+  }, [formValues.password]);
 
   const [passwordCheck, setPasswordCheck] = useState("");
 
@@ -20,7 +36,8 @@ export default function SignInPage() {
     formValues.email === "" ||
     formValues.password === "" ||
     passwordCheck === "" ||
-    passwordCheck !== formValues.password;
+    passwordCheck !== formValues.password ||
+    errorsForm.length > 0;
 
   const onSubmit = async (e: FormEvent) => {
     e.preventDefault();
@@ -104,6 +121,12 @@ export default function SignInPage() {
               Ya existe un usuario creado con ese correo
             </p>
           )}
+
+          {errorsForm.map((errorMessage) => (
+            <span key={errorMessage} className="text-red-500">
+              {errorMessage}
+            </span>
+          ))}
           <button
             type="submit"
             disabled={disableButton}

@@ -1,15 +1,17 @@
 import { addLink } from "@/actions/link_actions/actions";
-import { authOptions } from "@/app/api/auth/[...nextauth]/route";
+import { authOptions } from "@/auth.configs";
 import { getUserServerSession } from "@/auth/components/actions/auth-actions";
 import { Drawer, SocialTable } from "@/components";
 import prisma from "@/lib/prisma";
+import { getServerSession } from "next-auth";
 
 export default async function AdminPage() {
   const SocialLinks = await prisma.link.findMany();
+  const session = await getServerSession(authOptions);
   const user = await getUserServerSession();
 
   const isAdmin = Boolean(
-    user?.roles.find(
+    session?.user?.roles.find(
       (userRole: string) => userRole === "admin" || userRole === "super-user"
     )
   );

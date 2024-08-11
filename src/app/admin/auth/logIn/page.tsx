@@ -1,12 +1,12 @@
 "use client";
 
-import { signIn } from "next-auth/react";
+import { signIn, useSession } from "next-auth/react";
 import Image from "next/image";
 import Link from "next/link";
 import { redirect, useRouter } from "next/navigation";
-import { FormEvent, useState } from "react";
+import { FormEvent, useEffect, useState } from "react";
 
-export default function SignInPage() {
+export default function LogInPage() {
   const [formValues, setFormValues] = useState({
     email: "",
     password: "",

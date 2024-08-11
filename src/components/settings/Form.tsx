@@ -1,7 +1,8 @@
 "use client";
 
-import React, { FormEvent, useState } from "react";
+import React, { FormEvent, useEffect, useState } from "react";
 import { updatePassword } from "@/actions/user_actions/actions";
+import passwordSchema from "../passwordSchema";
 
 interface Props {
   email: string;
@@ -11,6 +12,21 @@ const Form = ({ email }: Props) => {
   const [password, setPassword] = useState("");
   const [passwordChecker, setPasswordChecker] = useState("");
   const [previousPassword, setPreviousPassword] = useState("");
+  const [errorsForm, setErrorsForm] = useState<string[]>([]);
+
+  const validatePassword = async (value: string) => {
+    try {
+      await passwordSchema.validate({ password: value }, { abortEarly: false });
+      setErrorsForm([]); // Sin errores
+    } catch (err) {
+      const validationErrors = err.inner.map((error) => error.message);
+      setErrorsForm(validationErrors);
+    }
+  };
+
+  useEffect(() => {
+    validatePassword(password);
+  }, [password]);
 
   const [submitErrors, setSubmitErrors] = useState({
     color: "",
@@ -20,6 +36,7 @@ const Form = ({ email }: Props) => {
 
   const handleSubmit = async (e: FormEvent) => {
     e.preventDefault();
+    if (disableButton) return null;
     const user = await updatePassword({ email, password, previousPassword });
 
     if (!user) {
@@ -38,6 +55,13 @@ const Form = ({ email }: Props) => {
       }));
     }
   };
+
+  const disableButton =
+    !password ||
+    !passwordChecker ||
+    !previousPassword ||
+    passwordChecker !== password ||
+    errorsForm.length > 0;
 
   return (
     <form className="flex flex-col standar-form" onSubmit={handleSubmit}>
@@ -88,12 +112,7 @@ const Form = ({ email }: Props) => {
       <button
         type="submit"
         onClick={() => ({})}
-        disabled={
-          !password ||
-          !passwordChecker ||
-          !previousPassword ||
-          passwordChecker !== password
-        }
+        disabled={disableButton}
         className={`my-2 text-white font-medium rounded-lg text-sm px-5 py-2.5 text-center ${
           password &&
           passwordChecker &&
@@ -105,6 +124,12 @@ const Form = ({ email }: Props) => {
       >
         Actualizar Contraseña
       </button>
+
+      {errorsForm.map((errorMessage) => (
+        <span key={errorMessage} className="text-red-500">
+          {errorMessage}
+        </span>
+      ))}
 
       {submitErrors.open && (
         <p style={{ color: submitErrors.color }}>{submitErrors.message}</p>
