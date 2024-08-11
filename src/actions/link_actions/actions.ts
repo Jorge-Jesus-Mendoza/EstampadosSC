@@ -1,7 +1,7 @@
 "use server";
 
 import prisma from "@/lib/prisma";
-import { Link, Prisma } from "@prisma/client";
+import { Prisma } from "@prisma/client";
 import { writeFile } from "fs/promises";
 import { revalidatePath } from "next/cache";
 import { join } from "path";
@@ -12,7 +12,7 @@ interface Props {
   id?: string;
 }
 
-export const addLink = async ({ name, url }: Props): Promise<Link | void> => {
+export const addLink = async ({ name, url }: Props) => {
   try {
     const todo = await prisma.link.create({ data: { name, url } });
     revalidatePath("/admin");
@@ -22,11 +22,7 @@ export const addLink = async ({ name, url }: Props): Promise<Link | void> => {
   }
 };
 
-export const updateLink = async ({
-  id,
-  name,
-  url,
-}: Props): Promise<Link | void> => {
+export const updateLink = async ({ id, name, url }: Props) => {
   const todo = prisma.link.findFirst({ where: { id } });
 
   if (!todo) {
