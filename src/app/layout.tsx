@@ -6,8 +6,8 @@ import AuthProvider from "@/auth/components/AuthProvider";
 const inter = Inter({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
-  title: "Create Next App",
-  description: "Generated  by create next app",
+  title: "Estampados SC",
+  description: "Especialistas en dar vida a tus ideas",
 };
 
 export default function RootLayout({
@@ -18,7 +18,13 @@ export default function RootLayout({
   return (
     <AuthProvider>
       <html lang="es">
-        <body className={`${inter.className} user-dashboard`}>{children}</body>
+        <head>
+          <link rel="icon" href="/images/favicon.ico" />
+
+          <body className={`${inter.className} user-dashboard`}>
+            {children}
+          </body>
+        </head>
       </html>
     </AuthProvider>
   );

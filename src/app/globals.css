@@ -65,6 +65,10 @@ h1 {
   height: auto;
 }
 
+.sara-background-lg {
+  visibility: hidden;
+}
+
 .social-table {
   display: inline-block;
   width: 200%;
@@ -108,7 +112,7 @@ h1 {
   transform: scale(1.05);
 }
 
-.sara-background {
+.sara-background-sm {
   background-color: white;
   border-radius: 81% 19% 0% 100% / 100% 23% 77% 0%;
 }
@@ -136,6 +140,11 @@ h1 {
 .logo {
   filter: brightness(0) invert(1);
   width: 25%;
+  height: auto;
+}
+
+.brand-logo {
+  width: 75%;
   height: auto;
 }
 
@@ -201,7 +210,7 @@ h1 {
   .download-button {
     margin-bottom: 25px;
   }
-  .sara-background {
+  .sara-background-sm {
     visibility: hidden;
   }
   .social-link {
@@ -234,8 +243,48 @@ h1 {
     width: 25%;
   }
 
+  .logo {
+    filter: none;
+  }
+
+  .user-dashboard {
+    background-color: white;
+    background-image: url("/images/H-BG2.png");
+    margin: 0;
+    padding: 0;
+    height: 100vh;
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+  }
+
+  .download-button {
+    border-color: #ff3080;
+
+    color: #ff3080;
+  }
+
+  .sara-background-sm {
+    visibility: hidden;
+  }
+
+  .sara-background-lg {
+    /* background-color: white; */
+    visibility: visible;
+    height: 100%;
+    width: 20%;
+
+    background-image: url("/images/H-SARA.png");
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: right;
+    background-position-y: bottom;
+    /* border-radius: 81% 19% 0% 100% / 100% 23% 77% 0%; */
+  }
+
   .sara-container {
-    background-image: url("/images/powered-w.png");
+    background-image: url("/images/powered.png");
 
     background-size: 15%;
     background-repeat: no-repeat;

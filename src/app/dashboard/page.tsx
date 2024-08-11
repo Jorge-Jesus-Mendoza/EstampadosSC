@@ -33,6 +33,16 @@ export default async function Home() {
             />
           </div>
         </Link>
+        <div className="flex justify-center">
+          <Image
+            src="/images/BRAND.png"
+            width={0}
+            height={0}
+            className="brand-logo my-2"
+            alt=""
+            sizes="100vw"
+          />
+        </div>
 
         <div className="flex flex-col gap-4 w-full justify-center items-center mt-4 social-column">
           {SocialLinks.map((data) => (
@@ -40,8 +50,8 @@ export default async function Home() {
           ))}
         </div>
 
-        <div className="sara-container w-full flex justify-end m-0">
-          <div className=" flex pl-5 justify-end sara-background">
+        <div className="sara-container z-10 w-full flex justify-end m-0">
+          <div className=" flex pl-5 justify-end sara-background-sm">
             <Image
               src="/images/V-SARA.png"
               priority
@@ -52,6 +62,8 @@ export default async function Home() {
               sizes="100vw"
             />
           </div>
+
+          <div className="z-10 sara-background-lg" />
         </div>
       </div>
     </div>
