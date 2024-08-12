@@ -12,7 +12,9 @@ export const GET = async () => {
     return new NextResponse(file.data, {
       headers: {
         "Content-Type": file.mimeType,
-        "Content-Disposition": `attachment; filename="${file.name}"`,
+        "Content-Disposition": `attachment; filename*=UTF-8''${encodeURIComponent(
+          file.name
+        )}`,
       },
     });
   } catch (error) {
