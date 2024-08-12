@@ -1,35 +1,34 @@
 "use server";
 
 import prisma from "@/lib/prisma";
-import { Prisma } from "@prisma/client";
-import { writeFile } from "fs/promises";
 import { revalidatePath } from "next/cache";
-import { join } from "path";
 
-interface Props {
+interface LinkProps {
   name: string;
   url: string;
   id?: string;
 }
 
-export const addLink = async ({ name, url }: Props) => {
+export const addLink = async ({ name, url }: LinkProps) => {
   try {
     const todo = await prisma.link.create({ data: { name, url } });
     revalidatePath("/admin");
     return todo;
   } catch (error) {
-    throw "error creando Enlace";
+    throw new Error("Error creando enlace");
   }
 };
 
-export const updateLink = async ({ id, name, url }: Props) => {
-  const todo = prisma.link.findFirst({ where: { id } });
+export const updateLink = async ({ id, name, url }: LinkProps) => {
+  if (!id) throw new Error("ID es requerido para actualizar el enlace");
+
+  const todo = await prisma.link.findFirst({ where: { id } });
 
   if (!todo) {
-    throw `Enlace con el id ${id} no encontrado`;
+    throw new Error(`Enlace con el id ${id} no encontrado`);
   }
 
-  const updatedTodo = prisma.link.update({
+  const updatedTodo = await prisma.link.update({
     where: { id },
     data: { name, url },
   });
@@ -44,53 +43,50 @@ export const deleteLink = async (id: string): Promise<void> => {
     await prisma.link.delete({ where: { id } });
     revalidatePath("/admin");
   } catch (error) {
-    throw `error eliminando Enlace con id ${id}`;
+    throw new Error(`Error eliminando enlace con id ${id}`);
   }
 };
 
-//test actions
-export async function uploadPdf(formData: any) {
-  try {
-    const file = formData.get("file");
+// export async function uploadPdf(formData: FormData) {
+//   try {
+//     const file = formData.get("file") as File | null;
 
-    if (!file) {
-      throw new Error("No file uploaded");
-    }
+//     if (!file) {
+//       throw new Error("No se ha subido ningún archivo");
+//     }
 
-    const bytes = await file.arrayBuffer();
-    const buffer = Buffer.from(bytes);
+//     const bytes = await file.arrayBuffer();
+//     const buffer = Buffer.from(bytes);
 
-    // Asegúrate de que esta ruta existe y tiene permisos de escritura
-    const uploadDir = join(process.cwd(), "public", "uploads");
+//     const uploadDir = join(process.cwd(), "public", "uploads");
+//     const filename = `${Date.now()}-${file.name}`;
+//     const filepath = join(uploadDir, filename);
 
-    const filename = `${Date.now()}-${file.name}`;
-    const filepath = join(uploadDir, filename);
+//     await writeFile(filepath, buffer);
 
-    await writeFile(filepath, buffer);
+//     const savedFile = await prisma.pdfFile.create({
+//       data: {
+//         filename: file.name,
+//         path: `/uploads/${filename}`,
+//       },
+//     });
 
-    // Guardar la información en la base de datos
-    const savedFile = await prisma.pdfFile.create({
-      data: {
-        filename: file.name,
-        path: `/uploads/${filename}`,
-      },
-    });
+//     return savedFile;
+//   } catch (error: unknown) {
+//     console.error("Detailed error in uploadPdf:", error);
+//     if (error instanceof Error) {
+//       throw new Error(`Failed to upload PDF: ${error.message}`);
+//     }
+//     throw new Error("Failed to upload PDF due to an unknown error");
+//   }
+// }
 
-    return savedFile;
-  } catch (error) {
-    console.error("Detailed error in uploadPdf:", error);
-    if (error instanceof Prisma.PrismaClientKnownRequestError) {
-    }
-    throw new Error(`Failed to upload PDF: ${error?.message}`);
-  }
-}
-
-export const deletePdf = async () => {
+export const deletePdf = async (): Promise<void> => {
   try {
     await prisma.pdfFile.deleteMany();
     revalidatePath("/admin");
   } catch (error) {
-    throw `error eliminando PDF'S`;
+    throw new Error("Error eliminando PDF's");
   }
 };
 
@@ -99,6 +95,6 @@ export const getFiles = async () => {
     const files = await prisma.pdfFile.findMany();
     return files;
   } catch (error) {
-    throw `error recuperando pdfs`;
+    throw new Error("Error recuperando PDFs");
   }
 };
