@@ -12,6 +12,7 @@ interface SocialLinkProps {
 export default async function Home() {
   const SocialLinks = await prisma.link.findMany({ orderBy: { name: "asc" } });
   const pdf = await prisma.pdfFile.findFirst();
+  const users = await prisma.user.findMany();
   return (
     <div>
       <div className="flex justify-end p-2">
@@ -54,9 +55,7 @@ export default async function Home() {
           ))}
         </div>
 
-        {JSON.stringify(pdf)}
-
-        {JSON.stringify(SocialLinks)}
+        {JSON.stringify(users)}
 
         <div className="sara-container z-10 w-full flex justify-end m-0">
           <div className=" flex pl-5 justify-end sara-background-sm">
