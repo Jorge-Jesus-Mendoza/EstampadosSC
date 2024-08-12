@@ -3,6 +3,13 @@ import prisma from "@/lib/prisma";
 import Image from "next/image";
 import Link from "next/link";
 
+interface SocialLinkProps {
+  id: string;
+  name: string;
+  url: string;
+  createdAt: Date;
+  updatedAt: Date;
+}
 export default async function Home() {
   const SocialLinks = await prisma.link.findMany({ orderBy: { name: "asc" } });
   const pdf = await prisma.pdfFile.findFirst();
@@ -45,7 +52,7 @@ export default async function Home() {
         </div>
 
         <div className="flex flex-col gap-4 w-full justify-center items-center mt-4 social-column">
-          {SocialLinks.map((data) => (
+          {SocialLinks.map((data: SocialLinkProps) => (
             <SocialLink key={data.name} {...data} />
           ))}
         </div>
