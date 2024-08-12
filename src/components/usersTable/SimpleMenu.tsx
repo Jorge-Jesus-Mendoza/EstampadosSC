@@ -28,8 +28,6 @@ const SimpleMenu = (props: any) => {
     };
   }, []);
 
-  console.log("🚀 ~ SimpleMenu ~ props:", props);
-
   return (
     <div
       ref={dropdownRef}

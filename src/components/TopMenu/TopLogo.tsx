@@ -16,7 +16,6 @@ interface Props {
 
 const TopLogo = ({ user }: Props) => {
   const actualPath = usePathname();
-  console.log("🚀 ~ TopMenu ~ user:", user);
   useEffect(() => {
     if (!user && !actualPath.includes("auth")) redirect("/admin/auth/logIn");
 
