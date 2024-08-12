@@ -1,6 +1,7 @@
 "use server";
 
 import prisma from "@/lib/prisma";
+import { Prisma } from "@prisma/client";
 import { writeFile } from "fs/promises";
 import { revalidatePath } from "next/cache";
 import { join } from "path";
@@ -78,7 +79,7 @@ export async function uploadPdf(formData: any) {
     return savedFile;
   } catch (error) {
     console.error("Detailed error in uploadPdf:", error);
-    if (error) {
+    if (error instanceof Prisma.PrismaClientKnownRequestError) {
     }
     throw new Error(`Failed to upload PDF: ${error?.message}`);
   }
