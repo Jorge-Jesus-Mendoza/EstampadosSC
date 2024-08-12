@@ -1,7 +1,6 @@
 "use server";
 
 import prisma from "@/lib/prisma";
-import { User } from "@prisma/client";
 import bcrypt from "bcryptjs";
 import { revalidatePath } from "next/cache";
 
@@ -45,11 +44,7 @@ export const deleteUser = async (id: string): Promise<void> => {
   }
 };
 
-export const updateUser = async ({
-  id,
-  roles,
-  isActive = true,
-}: Roles): Promise<User | void> => {
+export const updateUser = async ({ id, roles, isActive = true }: Roles) => {
   const user = prisma.user.findFirst({ where: { id } });
 
   if (!user) {
