@@ -1,7 +1,6 @@
 import { SocialLink } from "@/components";
 import prisma from "@/lib/prisma";
 import Image from "next/image";
-import Link from "next/link";
 
 interface SocialLinkProps {
   id: string;
@@ -28,18 +27,16 @@ export default async function Home() {
       </div>
 
       <div className="flex flex-col text-center items-center  justify-center mt-4 p-0">
-        <Link href={"/admin/list"}>
-          <div className="flex justify-center">
-            <Image
-              src="/images/H_LOGO.png"
-              width={0}
-              height={0}
-              className="logo"
-              alt=""
-              sizes="100vw"
-            />
-          </div>
-        </Link>
+        <div className="flex justify-center">
+          <Image
+            src="/images/H_LOGO.png"
+            width={0}
+            height={0}
+            className="logo"
+            alt=""
+            sizes="100vw"
+          />
+        </div>
         <div className="flex justify-center">
           <Image
             src="/images/BRAND.png"
