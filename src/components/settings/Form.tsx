@@ -19,8 +19,12 @@ const Form = ({ email }: Props) => {
       await passwordSchema.validate({ password: value }, { abortEarly: false });
       setErrorsForm([]); // Sin errores
     } catch (err) {
-      const validationErrors = err.inner.map((error) => error.message);
-      setErrorsForm(validationErrors);
+      if (err instanceof Error && "inner" in err) {
+        const validationErrors = (err as any).inner.map(
+          (error: any) => error.message
+        );
+        setErrorsForm(validationErrors);
+      }
     }
   };
 
