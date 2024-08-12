@@ -54,6 +54,8 @@ export default async function Home() {
           ))}
         </div>
 
+        {JSON.stringify(SocialLinks)}
+
         <div className="sara-container z-10 w-full flex justify-end m-0">
           <div className=" flex pl-5 justify-end sara-background-sm">
             <Image
