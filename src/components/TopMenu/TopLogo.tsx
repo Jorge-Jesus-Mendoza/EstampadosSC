@@ -21,7 +21,7 @@ const TopLogo = ({ user }: Props) => {
     if (!user && !actualPath.includes("auth")) redirect("/admin/auth/logIn");
 
     return () => {};
-  }, []);
+  }, [user, actualPath]);
 
   return (
     <Link href={"/dashboard"}>

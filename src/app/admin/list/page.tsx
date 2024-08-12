@@ -8,10 +8,9 @@ import { getServerSession } from "next-auth";
 export default async function AdminPage() {
   const SocialLinks = await prisma.link.findMany();
   const session = await getServerSession(authOptions);
-  const user = await getUserServerSession();
 
   const isAdmin = Boolean(
-    session?.user?.roles.find(
+    session?.user?.roles?.find(
       (userRole: string) => userRole === "admin" || userRole === "super-user"
     )
   );

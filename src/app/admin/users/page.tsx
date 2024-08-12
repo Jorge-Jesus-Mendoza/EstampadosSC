@@ -1,7 +1,4 @@
-import { addLink } from "@/actions/link_actions/actions";
-import { authOptions } from "@/app/api/auth/[...nextauth]/route";
 import { getUserServerSession } from "@/auth/components/actions/auth-actions";
-import { Drawer, SocialTable } from "@/components";
 import { UsersTable } from "@/components/usersTable/UsersTable";
 import prisma from "@/lib/prisma";
 
