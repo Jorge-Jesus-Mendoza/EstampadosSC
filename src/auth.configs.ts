@@ -1,9 +1,14 @@
 import { PrismaAdapter } from "@auth/prisma-adapter";
-import nextAuth, { NextAuthOptions } from "next-auth";
+import { NextAuthOptions } from "next-auth";
 import prisma from "./lib/prisma";
 import { Adapter } from "next-auth/adapters";
 import CredentialsProvider from "next-auth/providers/credentials";
 import { signInEmailPassword } from "./auth/components/actions/auth-actions";
+
+interface UserWithError {
+  error: string;
+  // otras propiedades de User...
+}
 
 export const authOptions: NextAuthOptions = {
   adapter: PrismaAdapter(prisma) as Adapter,
@@ -58,8 +63,10 @@ export const authOptions: NextAuthOptions = {
 
   callbacks: {
     async signIn({ user }) {
-      if (user && "error" in user) {
-        throw new Error(user.error);
+      const userWithError = user as unknown as UserWithError;
+
+      if (userWithError.error) {
+        throw new Error(userWithError.error);
       }
       return true;
     },
@@ -74,16 +81,17 @@ export const authOptions: NextAuthOptions = {
           throw new Error("El usuario no está activo");
         }
 
-        token.roles = dbUser?.roles ?? ["no-roles"];
+        // Manipulación del token usando el tipo genérico `JWT`
+        token.roles = dbUser?.roles ? (dbUser.roles as string[]) : ["no-roles"];
         token.id = dbUser?.id ?? "no-uuid";
       }
 
-      return token;
+      return token; // Asegúrate de retornar el token, que es de tipo `JWT`
     },
 
     async session({ session, token }) {
       if (session?.user) {
-        session.user.roles = token.roles;
+        session.user.roles = token.roles as string[]; // Asegúrate de que sea un string[]
       }
       return session;
     },
