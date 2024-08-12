@@ -1,7 +1,6 @@
 // import prisma from "@/lib/prisma";
 import prisma from "@/lib/prisma";
-import { Link } from "@prisma/client";
-import { NextResponse, NextRequest } from "next/server";
+import { NextResponse } from "next/server";
 import * as yup from "yup";
 
 interface Segments {
@@ -10,7 +9,7 @@ interface Segments {
   };
 }
 
-const getLink = async (id: string): Promise<Link | null> => {
+const getLink = async (id: string) => {
   const link = await prisma.link.findFirst({ where: { id } });
 
   return link;
