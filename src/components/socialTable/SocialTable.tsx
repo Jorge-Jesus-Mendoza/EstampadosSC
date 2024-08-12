@@ -1,6 +1,5 @@
 "use client";
 
-import { Link } from "@prisma/client";
 import {
   useReactTable,
   getCoreRowModel,
@@ -10,13 +9,18 @@ import {
   Row,
 } from "@tanstack/react-table";
 import React, { useMemo, useState } from "react";
-import moment from "moment";
 import { deleteLink, updateLink } from "@/actions/link_actions/actions";
 import { IoPencil, IoTrash } from "react-icons/io5";
 import Swal from "sweetalert2";
 import { Drawer } from "./Drawer";
-import ReactPaginate from "react-paginate";
 
+type Link = {
+  id: string;
+  name: string;
+  url: string;
+  createdAt: Date;
+  updatedAt: Date;
+};
 interface Props {
   links: Link[];
   isAdmin: boolean;

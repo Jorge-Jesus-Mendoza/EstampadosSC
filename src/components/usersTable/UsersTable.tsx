@@ -1,6 +1,5 @@
 "use client";
 
-import { Link, User } from "@prisma/client";
 import {
   useReactTable,
   getCoreRowModel,
@@ -16,6 +15,16 @@ import { Drawer } from "./Drawer";
 import { deleteUser, updateUser } from "@/actions/user_actions/actions";
 import SimpleMenu from "./SimpleMenu";
 
+type User = {
+  id: string;
+  name: string | null;
+  password: string | null;
+  roles: string[];
+  isActive: boolean;
+  email: string | null;
+  emailVerified: Date | null;
+  image: string | null;
+};
 interface Props {
   usersList: User[];
 
