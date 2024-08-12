@@ -1,7 +1,7 @@
 import prisma from "@/lib/prisma";
 import { NextResponse } from "next/server";
 
-export const POST = async (req) => {
+export const POST = async (req: any) => {
   try {
     await prisma.pdfFile.deleteMany();
     const formData = await req.formData();
