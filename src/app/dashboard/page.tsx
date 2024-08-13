@@ -17,7 +17,7 @@ export default async function Home() {
   const pdf = await prisma.pdfFile.findFirst();
   return (
     <div className="super-sara">
-      <div className="flex justify-end top-container">
+      <div className="flex justify-end p-2 top-container">
         {pdf && (
           <a
             href={`/api/file/${pdf?.id}`}
