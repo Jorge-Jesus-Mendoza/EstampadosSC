@@ -41,7 +41,7 @@ h1 {
 }
 
 .user-dashboard {
-  background-color: rgb(255, 0, 166);
+  background-color: #ff3080;
   /* background-image: url("/images/woman_placeholder.png");
   background-repeat: no-repeat;
   background-position-x: right;
@@ -114,14 +114,14 @@ h1 {
 
 .sara-background-sm {
   background-color: white;
-  border-radius: 81% 19% 0% 100% / 100% 23% 77% 0%;
+  border-radius: 87% 13% 0% 100% / 100% 8% 92% 0%;
 }
 
 .sara-container {
   position: fixed;
   bottom: 0;
   z-index: -5;
-  height: 50%;
+  height: 100%;
   /* background-color: chartreuse; */
 }
 
@@ -168,6 +168,7 @@ h1 {
   .download-button {
     padding: 0.5rem;
     margin-bottom: 25px;
+    font-size: medium;
     /* padding: auto; */
   }
 
@@ -184,12 +185,28 @@ h1 {
   }
 
   .sara-container {
-    height: 40%;
+    background-color: white;
+    height: 65%;
+    border-radius: 87% 13% 0% 100% / 100% 8% 92% 0%;
+    background-image: url("/images/V-SARA.png");
+    background-size: 85%;
+    background-repeat: no-repeat;
+    background-position: right;
+    background-position-y: bottom;
   }
 
   .social-link {
     width: 70%;
     height: 3rem;
+  }
+
+  .top-container {
+    background-image: url("/images/powered.png");
+    background-size: 30%;
+    background-repeat: no-repeat;
+    background-position: left;
+    background-position-y: top;
+    background-position: left 10px top 25px;
   }
   /* … */
 }
@@ -216,6 +233,9 @@ h1 {
   .social-link {
     width: 60%;
   }
+  .sara-container {
+    visibility: hidden;
+  }
   /* … */
 }
 
@@ -231,12 +251,32 @@ h1 {
   .auth-form {
     width: 80%;
   }
+
+  .sara-container {
+    background-color: white;
+    height: 65%;
+    border-radius: 87% 13% 0% 100% / 100% 8% 92% 0%;
+    background-image: url("/images/V-SARA.png");
+    background-size: 60%;
+    background-repeat: no-repeat;
+    background-position: right;
+    background-position-y: bottom;
+  }
+
+  .top-container {
+    background-image: url("/images/powered.png");
+    background-size: 30%;
+    background-repeat: no-repeat;
+    background-position: left;
+    background-position-y: top;
+    background-position: left 10px top 25px;
+  }
   /* … */
 }
 
 @media screen and (min-width: 64em) {
   .logo {
-    width: 10%;
+    width: 8%;
   }
 
   .standar-form {
@@ -276,12 +316,25 @@ h1 {
     height: 100%;
     width: 20%;
 
-    background-image: url("/images/H-SARA.png");
+    /* background-image: url("/images/H-SARA.png"); */
     background-size: contain;
     background-repeat: no-repeat;
     background-position: right;
     background-position-y: bottom;
     /* border-radius: 81% 19% 0% 100% / 100% 23% 77% 0%; */
+  }
+
+  .brand-logo {
+    filter: none;
+  }
+
+  .super-sara {
+    height: 100vh;
+    background-image: url("/images/H-SARA.png");
+    background-size: 28%;
+    background-repeat: no-repeat;
+    background-position: right;
+    background-position-y: bottom;
   }
 
   .sara-container {

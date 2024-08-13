@@ -16,8 +16,8 @@ export default async function Home() {
   const SocialLinks = await prisma.link.findMany({ orderBy: { name: "asc" } });
   const pdf = await prisma.pdfFile.findFirst();
   return (
-    <div>
-      <div className="flex justify-end p-2">
+    <div className="super-sara">
+      <div className="flex justify-end top-container">
         {pdf && (
           <a
             href={`/api/file/${pdf?.id}`}
@@ -29,7 +29,7 @@ export default async function Home() {
         )}
       </div>
 
-      <div className="flex flex-col text-center items-center  justify-center mt-4 p-0">
+      <div className="flex flex-col text-center items-center  justify-center p-0">
         <div className="flex justify-center">
           <Image
             src="/images/H_LOGO.png"
@@ -51,14 +51,14 @@ export default async function Home() {
           />
         </div>
 
-        <div className="flex flex-col gap-4 w-full justify-center items-center mt-4 social-column">
+        <div className="flex flex-col gap-4 w-full justify-center items-center mt-2 social-column">
           {SocialLinks.map((data: SocialLinkProps) => (
             <SocialLink key={data.name} {...data} />
           ))}
         </div>
 
         <div className="sara-container z-10 w-full flex justify-end m-0">
-          <div className=" flex pl-5 justify-end sara-background-sm">
+          {/* <div className=" flex pl-5 justify-end sara-background-sm">
             <Image
               src="/images/V-SARA.png"
               priority
@@ -68,7 +68,7 @@ export default async function Home() {
               alt=""
               sizes="100vw"
             />
-          </div>
+          </div> */}
 
           <div className="z-10 sara-background-lg" />
         </div>

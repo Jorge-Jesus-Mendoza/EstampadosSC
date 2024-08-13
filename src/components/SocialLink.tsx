@@ -11,7 +11,7 @@ export const SocialLink = ({ name, url }: Props) => {
     <Link
       href={url}
       target="_blank"
-      className="bg-white social-link h-1 flex justify-center items-center rounded-3xl link-expanded"
+      className="bg-white social-link flex justify-center items-center rounded-3xl link-expanded"
     >
       {" "}
       {name}
