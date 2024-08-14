@@ -63,6 +63,7 @@ const Form = ({ pdfId, pdfName, catalogId, catalogUrl }: Props) => {
 
   const handleSubmit = async (e: FormEvent) => {
     e.preventDefault();
+    setLoading(true);
     if (url.trim().length === 0) {
       return;
     }
@@ -79,12 +80,15 @@ const Form = ({ pdfId, pdfName, catalogId, catalogUrl }: Props) => {
         text: "Se ha actualizado el enlace del catálogo!",
         icon: "success",
       });
+
+      setLoading(false);
     } else {
       Swal.fire({
         icon: "error",
         title: "Error!",
         text: "Algo ha fallado al actualizar el catálogo!",
       });
+      setLoading(false);
     }
   };
 
