@@ -36,7 +36,7 @@ export default async function Home() {
             className="p-5 rounded-3xl download-button"
             target="_blank"
           >
-            Descarga nuestro catalogo
+            Mira nuestro catálogos
           </Link>
         )}
       </div>
