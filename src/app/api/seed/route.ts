@@ -7,6 +7,8 @@ export async function GET(request: Request) {
   await prisma.user.deleteMany();
   await prisma.pdfFile.deleteMany();
 
+  await prisma.catalog_Url.deleteMany();
+
   await prisma.user.create({
     data: {
       email: "test1@google.com",
@@ -30,6 +32,12 @@ export async function GET(request: Request) {
         url: "https://www.facebook.com/",
       },
     ],
+  });
+
+  await prisma.catalog_Url.create({
+    data: {
+      url: "https://drive.google.com/file/d/1V9zjwhiB_tD_gAAGro4s8q8_wf_PuAb4/view?usp=drive_link",
+    },
   });
 
   return NextResponse.json({ message: "Seed Executed" });

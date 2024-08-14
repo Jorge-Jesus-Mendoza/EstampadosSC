@@ -90,6 +90,44 @@ export const deletePdf = async (): Promise<void> => {
   }
 };
 
+export const addCatalogUrl = async (url: string) => {
+  try {
+    const catalog = await prisma.catalog_Url.create({ data: { url } });
+    revalidatePath("/admin");
+    return catalog;
+  } catch (error) {
+    throw new Error("Error creando enlace");
+  }
+};
+
+export const deleteCatalogUrl = async (): Promise<void> => {
+  try {
+    await prisma.catalog_Url.deleteMany();
+    revalidatePath("/admin");
+  } catch (error) {
+    throw new Error("Error eliminando Catálogo");
+  }
+};
+
+export const updateCatalogUrl = async (id: number, url: string) => {
+  if (!id) throw new Error("ID es requerido para actualizar el enlace");
+
+  const todo = await prisma.catalog_Url.findFirst({ where: { id } });
+
+  if (!todo) {
+    throw new Error(`Enlace con el id ${id} no encontrado`);
+  }
+
+  const updatedCatalogUrl = await prisma.catalog_Url.update({
+    where: { id },
+    data: { url },
+  });
+
+  revalidatePath("/admin");
+
+  return updatedCatalogUrl;
+};
+
 export const getFiles = async () => {
   try {
     const files = await prisma.pdfFile.findMany();

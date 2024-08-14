@@ -1,6 +1,7 @@
 import { SocialLink } from "@/components";
 import prisma from "@/lib/prisma";
 import Image from "next/image";
+import Link from "next/link";
 
 interface SocialLinkProps {
   id: string;
@@ -15,10 +16,12 @@ export const dynamic = "force-dynamic";
 export default async function Home() {
   const SocialLinks = await prisma.link.findMany({ orderBy: { name: "asc" } });
   const pdf = await prisma.pdfFile.findFirst();
+  const catalogUrl = await prisma.catalog_Url.findFirst();
+
   return (
     <div className="super-sara">
       <div className="flex justify-end p-2 top-container">
-        {pdf && (
+        {/* {pdf && (
           <a
             href={`/api/file/${pdf?.id}`}
             className="p-5 rounded-3xl download-button"
@@ -26,6 +29,15 @@ export default async function Home() {
           >
             Descarga nuestro catalogo
           </a>
+        )} */}
+        {catalogUrl && (
+          <Link
+            href={catalogUrl.url}
+            className="p-5 rounded-3xl download-button"
+            target="_blank"
+          >
+            Descarga nuestro catalogo
+          </Link>
         )}
       </div>
 
