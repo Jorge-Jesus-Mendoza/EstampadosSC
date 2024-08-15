@@ -300,9 +300,10 @@ h1 {
   }
 
   .download-button {
-    border-color: #ff3080;
+    border-color: white;
+    background-color: #ff3080;
 
-    color: #ff3080;
+    color: white;
     margin-right: 40px;
   }
 
